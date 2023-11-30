@@ -39,11 +39,31 @@ class TransfermarktClubSearch(TransfermarktBase):
         """
         clubs_names = self.get_list_by_xpath(Clubs.Search.NAMES)
         clubs_urls = self.get_list_by_xpath(Clubs.Search.URLS)
+        clubs_ids = [extract_from_url(url) for url in clubs_urls]
         clubs_countries = self.get_list_by_xpath(Clubs.Search.COUNTRIES)
         clubs_squads = self.get_list_by_xpath(Clubs.Search.SQUADS)
         clubs_market_values = self.get_list_by_xpath(Clubs.Search.MARKET_VALUES)
-        clubs_ids = [extract_from_url(url) for url in clubs_urls]
 
+        clubs_league = self.get_list_by_xpath(Clubs.Search.LEAGUE)
+        filteredClubs = []
+        i = 0
+        j = 0
+        lastMatch = 1
+        while i < len(clubs_league):
+            if clubs_names[j] == clubs_league[i]:
+                i+=1
+                j+=1
+                if lastMatch == 0:
+                    filteredClubs.append("")
+                lastMatch = 0
+            else:
+                filteredClubs.append(clubs_league[i])
+                i+=1
+                lastMatch = 1
+
+        print(filteredClubs, clubs_names, clubs_league)
+
+        
         return [
             {
                 "id": idx,
@@ -52,14 +72,16 @@ class TransfermarktClubSearch(TransfermarktBase):
                 "country": country,
                 "squad": squad,
                 "marketValue": market_value,
+                "league" : clubs_league,
             }
-            for idx, url, name, country, squad, market_value in zip(
+            for idx, url, name, country, squad, market_value, clubs_league in zip(
                 clubs_ids,
                 clubs_urls,
                 clubs_names,
                 clubs_countries,
                 clubs_squads,
                 clubs_market_values,
+                filteredClubs,
             )
         ]
 

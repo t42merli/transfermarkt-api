@@ -127,6 +127,7 @@ class Clubs:
         BASE = "//div[@class='box'][h2[contains(text(), 'Clubs')]]"
         NAMES = BASE + "//td[@class='hauptlink']//a//@title"
         URLS = BASE + "//td[@class='hauptlink']//a//@href"
+        LEAGUE = BASE + "//table[@class='inline-table']//a//@title"
         COUNTRIES = BASE + "//td[@class='zentriert']//img[@class='flaggenrahmen']//@title"
         MARKET_VALUES = BASE + "//td[@class='rechts']//text()"
         SQUADS = BASE + "//td[@class='zentriert']//text()"
