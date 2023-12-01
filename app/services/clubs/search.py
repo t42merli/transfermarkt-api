@@ -45,23 +45,31 @@ class TransfermarktClubSearch(TransfermarktBase):
         clubs_market_values = self.get_list_by_xpath(Clubs.Search.MARKET_VALUES)
 
         clubs_league = self.get_list_by_xpath(Clubs.Search.LEAGUE)
+        clubs_league_urls = self.get_list_by_xpath(Clubs.Search.LEAGUE_URLS)
+        clubs_league_ids =  [extract_from_url(url) for url in clubs_league_urls]
+        clubs_league_ids_formatted = []
         filteredClubs = []
+
+        print(len(clubs_names), '\n\n', len(clubs_league))
         i = 0
         j = 0
+        k = 0
         lastMatch = 1
         while i < len(clubs_league):
-            if clubs_names[j] == clubs_league[i]:
+            if j >= len(clubs_names) or clubs_names[j] == clubs_league[i]:
                 i+=1
                 j+=1
                 if lastMatch == 0:
                     filteredClubs.append("")
+                    clubs_league_ids_formatted.append("")
                 lastMatch = 0
             else:
                 filteredClubs.append(clubs_league[i])
+                clubs_league_ids_formatted.append(clubs_league_ids[k])
                 i+=1
+                k+=1
                 lastMatch = 1
 
-        print(filteredClubs, clubs_names, clubs_league)
 
         
         return [
@@ -73,8 +81,9 @@ class TransfermarktClubSearch(TransfermarktBase):
                 "squad": squad,
                 "marketValue": market_value,
                 "league" : clubs_league,
+                "leagueId": clubs_league_ids_formatted
             }
-            for idx, url, name, country, squad, market_value, clubs_league in zip(
+            for idx, url, name, country, squad, market_value, clubs_league, clubs_league_ids_formatted in zip(
                 clubs_ids,
                 clubs_urls,
                 clubs_names,
@@ -82,6 +91,7 @@ class TransfermarktClubSearch(TransfermarktBase):
                 clubs_squads,
                 clubs_market_values,
                 filteredClubs,
+                clubs_league_ids_formatted
             )
         ]
 

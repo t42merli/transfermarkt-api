@@ -128,6 +128,7 @@ class Clubs:
         NAMES = BASE + "//td[@class='hauptlink']//a//@title"
         URLS = BASE + "//td[@class='hauptlink']//a//@href"
         LEAGUE = BASE + "//table[@class='inline-table']//a//@title"
+        LEAGUE_URLS = BASE + "//table[@class='inline-table']//tr[2]//a//@href"
         COUNTRIES = BASE + "//td[@class='zentriert']//img[@class='flaggenrahmen']//@title"
         MARKET_VALUES = BASE + "//td[@class='rechts']//text()"
         SQUADS = BASE + "//td[@class='zentriert']//text()"
