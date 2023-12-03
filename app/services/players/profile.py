@@ -65,6 +65,10 @@ class TransfermarktPlayerProfile(TransfermarktBase):
         self.response["club"] = {
             "id": extract_from_url(self.get_text_by_xpath(Players.Profile.CURRENT_CLUB_URL)),
             "name": self.get_text_by_xpath(Players.Profile.CURRENT_CLUB_NAME),
+            "league": self.get_text_by_xpath(Players.Profile.CURRENT_CLUB_LEAGUE),
+            "country": self.get_text_by_xpath(Players.Profile.CURRENT_CLUB_COUNTRY),
+            "name": self.get_text_by_xpath(Players.Profile.CURRENT_CLUB_NAME),
+            
             "joined": self.get_text_by_xpath(Players.Profile.CURRENT_CLUB_JOINED),
             "contractExpires": self.get_text_by_xpath(Players.Profile.CURRENT_CLUB_CONTRACT_EXPIRES),
             "contractOption": self.get_text_by_xpath(Players.Profile.CURRENT_CLUB_CONTRACT_OPTION),

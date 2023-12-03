@@ -29,7 +29,7 @@ $ export PYTHONPATH=$PYTHONPATH:$(pwd)
 $ python app/main.py
 
 # Access the API local page
-$ open http://localhost:8000/
+$ open http://localhost:3003/
 ````
 
 ### Running via Docker
@@ -45,8 +45,8 @@ $ cd transfermarkt-api
 $ docker build -t transfermarkt-api . 
 
 # Instantiate the Docker container
-$ docker run -d -p 8000:8000 transfermarkt-api
+$ docker run -d -p 8000:3003 transfermarkt-api
 
 # Access the API local page
-$ open http://localhost:8000/
+$ open http://localhost:3003/
 ````

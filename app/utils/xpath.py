@@ -9,6 +9,8 @@ class Players:
         CURRENT_CLUB_NAME = "//span[@class='data-header__club']//text()"
         CURRENT_CLUB_URL = "//span[@class='data-header__club']//a//@href"
         CURRENT_CLUB_JOINED = "//span[text()='Joined: ']//span//text()"
+        CURRENT_CLUB_LEAGUE = "//span[@class='data-header__league']//text()"
+        CURRENT_CLUB_COUNTRY = "//img[@class='flaggenrahmen']//@alt"
         LAST_CLUB_NAME = "//span[contains(text(),'Last club:')]//span//a//@title"
         LAST_CLUB_URL = "//span[contains(text(),'Last club:')]//span//a//@href"
         MOST_GAMES_FOR_CLUB_NAME = "//span[contains(text(),'Most games for:')]//span//a//text()"
