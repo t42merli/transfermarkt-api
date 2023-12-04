@@ -22,7 +22,7 @@ class TransfermarktPlayerProfile(TransfermarktBase):
     """
 
     player_id: str = None
-    URL: str = "https://www.transfermarkt.com/-/profil/spieler/{player_id}"
+    URL: str = "https://www.transfermarkt.fr/-/profil/spieler/{player_id}"
 
     def __post_init__(self) -> None:
         """Initialize the TransfermarktPlayerProfile class."""
@@ -76,7 +76,7 @@ class TransfermarktPlayerProfile(TransfermarktBase):
             "lastClubName": self.get_text_by_xpath(Players.Profile.LAST_CLUB_NAME),
             "mostGamesFor": self.get_text_by_xpath(Players.Profile.MOST_GAMES_FOR_CLUB_NAME),
         }
-        self.response["marketValue"] = self.get_text_by_xpath(Players.Profile.MARKET_VALUE, iloc_to=3, join_str="")
+        self.response["marketValue"] = self.get_text_by_xpath(Players.Profile.MARKET_VALUE, iloc_to=2, join_str="")
         self.response["agent"] = {
             "name": self.get_text_by_xpath(Players.Profile.AGENT_NAME),
             "url": self.get_text_by_xpath(Players.Profile.AGENT_URL),
