@@ -15,7 +15,7 @@ class Players:
         LAST_CLUB_URL = "//span[contains(text(),'Last club:')]//span//a//@href"
         MOST_GAMES_FOR_CLUB_NAME = "//span[contains(text(),'Most games for:')]//span//a//text()"
         RETIRED_SINCE_DATE = "//span[contains(text(),'Retired since:')]//span//text()"
-        CURRENT_CLUB_CONTRACT_EXPIRES = "//span[text()='Contract expires: ']//span//text()"
+        CURRENT_CLUB_CONTRACT_EXPIRES = "//span[contains(text(),'Contrat jusqu')]//span//text()"
         CURRENT_CLUB_CONTRACT_OPTION = "//span[contains(text(),'Contract option:')]//following::span[1]//text()"
         NAME_IN_HOME_COUNTRY = "//span[text()='Name in home country:']//following::span[1]//text()"
         FULL_NAME = "//span[text()='Full name:']//following::span[1]//text()"
