@@ -3,6 +3,8 @@ class Players:
         ID = "//div[@data-action='profil']//@data-id"
         URL = "//a[@class='tm-subnav-item megamenu']//@href"
         NAME = "//h1[@class='data-header__headline-wrapper']//strong//text()"
+        FIRSTNAME2 = "//h1[@class='data-header__headline-wrapper']//text()[2]"
+        FIRSTNAME1 = "//h1[@class='data-header__headline-wrapper']//text()[1]"
         DESCRIPTION = "//meta[@name='description']//@content"
         IMAGE_URL = "//div[@id='fotoauswahlOeffnen']//img//@src"
         SHIRT_NUMBER = "//span[@class='data-header__shirt-number']//text()"

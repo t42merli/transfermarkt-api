@@ -39,9 +39,12 @@ class TransfermarktPlayerProfile(TransfermarktBase):
             dict: A dictionary containing the player's unique identifier, profile information, and the timestamp of when
                 the data was last updated.
         """
+
         self.response["id"] = self.get_text_by_xpath(Players.Profile.ID)
         self.response["url"] = self.get_text_by_xpath(Players.Profile.URL)
         self.response["name"] = self.get_text_by_xpath(Players.Profile.NAME)
+        self.response["firstname"] = self.get_text_by_xpath(Players.Profile.FIRSTNAME2) or self.get_text_by_xpath(Players.Profile.FIRSTNAME1) #if the player is retired it has no shirtnumber so there is only one text() node
+        self.response["shirtNumber"] = self.get_text_by_xpath(Players.Profile.SHIRT_NUMBER)
         self.response["description"] = self.get_text_by_xpath(Players.Profile.DESCRIPTION)
         self.response["fullName"] = self.get_text_by_xpath(Players.Profile.FULL_NAME)
         self.response["nameInHomeCountry"] = self.get_text_by_xpath(Players.Profile.NAME_IN_HOME_COUNTRY)
@@ -61,7 +64,6 @@ class TransfermarktPlayerProfile(TransfermarktBase):
             "other": self.get_list_by_xpath(Players.Profile.POSITION_OTHER),
         }
         self.response["foot"] = self.get_text_by_xpath(Players.Profile.FOOT)
-        self.response["shirtNumber"] = self.get_text_by_xpath(Players.Profile.SHIRT_NUMBER)
         self.response["club"] = {
             "id": extract_from_url(self.get_text_by_xpath(Players.Profile.CURRENT_CLUB_URL)),
             "name": self.get_text_by_xpath(Players.Profile.CURRENT_CLUB_NAME),
