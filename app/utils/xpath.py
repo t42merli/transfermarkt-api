@@ -32,8 +32,8 @@ class Players:
         POSITION_OTHER = "//dt[contains(text(),'Position secondaire:')]//following::dd//text()"
         FOOT = "//span[text()='Pied:']//following::span[1]//text()"
         MARKET_VALUE = "//a[@class='data-header__market-value-wrapper']//text()"
-        AGENT_NAME = "//span[text()='Player agent:']//following::span[1]//text()"
-        AGENT_URL = "//span[text()='Player agent:']//following::span[1]//a//@href"
+        AGENT_NAME = "//span[text()='Agent du joueur:']//following::span[1]//text()"
+        AGENT_URL = "//span[text()='Agent du joueur:']//following::span[1]//a//@href"
         OUTFITTER = "//span[contains(text(),'Outfitter:')]//following::span[1]//text()"
         SOCIAL_MEDIA = "//div[@class='socialmedia-icons']//@href"
 
