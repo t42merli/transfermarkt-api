@@ -9,7 +9,7 @@ from lxml import etree
 from requests import Response, TooManyRedirects
 
 from app.utils.utils import trim
-from app.utils.xpath import Commons
+from app.utils.xpath import Pagination
 
 
 @dataclass
@@ -58,6 +58,10 @@ class TransfermarktBase:
             )
         except TooManyRedirects:
             raise HTTPException(status_code=404, detail=f"Not found for url: {url}")
+        except ConnectionError:
+            raise HTTPException(status_code=500, detail=f"Connection error for url: {url}")
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=f"Error for url: {url}. {e}")
         if 400 <= response.status_code < 500:
             raise HTTPException(
                 status_code=response.status_code,
@@ -201,9 +205,9 @@ class TransfermarktBase:
         except IndexError:
             return None
 
-    def get_search_last_page_number(self, xpath_base: str) -> int:
+    def get_last_page_number(self, xpath_base: str = "") -> int:
         """
-        Retrieve the last page number for search results based on the provided base XPath.
+        Retrieve the last page number for a paginated result based on the provided base XPath.
 
         Args:
             xpath_base (str): The base XPath for extracting page number information.
@@ -211,13 +215,9 @@ class TransfermarktBase:
         Returns:
             int: The last page number for search results. Returns 1 if no page numbers are found.
         """
-        url_page_number_last = self.get_text_by_xpath(xpath_base + Commons.Search.PAGE_NUMBER_LAST)
-        url_page_number_active = self.get_text_by_xpath(xpath_base + Commons.Search.PAGE_NUMBER_ACTIVE)
 
-        if url_page_number_last:
-            return int(url_page_number_last.split("=")[-1])
-
-        if url_page_number_active:
-            return int(url_page_number_active.split("=")[-1])
-
+        for xpath in [Pagination.PAGE_NUMBER_LAST, Pagination.PAGE_NUMBER_ACTIVE]:
+            url_page = self.get_text_by_xpath(xpath_base + xpath)
+            if url_page:
+                return int(url_page.split("=")[-1].split("/")[-1])
         return 1

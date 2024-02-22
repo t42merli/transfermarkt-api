@@ -1,7 +1,17 @@
 class Players:
+    class Injuries:
+        RESULTS = "//div[@id='yw1']//tbody//tr"
+        SEASONS = ".//td[1]//text()"
+        INJURY = ".//td[2]//text()"
+        FROM = ".//td[3]//text()"
+        UNTIL = ".//td[4]//text()"
+        DAYS = ".//td[5]//text()"
+        GAMES_MISSED = ".//td[6]//span//text()"
+        GAMES_MISSED_CLUBS_URLS = ".//td[6]//a//@href"
+
     class Profile:
-        ID = "//div[@data-action='profil']//@data-id"
-        URL = "//a[@class='tm-subnav-item megamenu']//@href"
+        ID = "//tm-subnavigation[@controller='spieler']//@id"
+        URL = "//link[@rel='canonical']//@href"
         NAME = "//h1[@class='data-header__headline-wrapper']//strong//text()"
         FIRSTNAME2 = "//h1[@class='data-header__headline-wrapper']//text()[2]"
         FIRSTNAME1 = "//h1[@class='data-header__headline-wrapper']//text()[1]"
@@ -21,7 +31,7 @@ class Players:
         CURRENT_CLUB_CONTRACT_OPTION = "//span[contains(text(),'Contract option:')]//following::span[1]//text()"
         NAME_IN_HOME_COUNTRY = "//span[text()='Name in home country:']//following::span[1]//text()"
         FULL_NAME = "//span[text()='Full name:']//following::span[1]//text()"
-        DATE_OF_BIRTH = "//span[text()='Naissance (âge):']//following::span[1]//a//text()"
+        DATE_OF_BIRTH_AGE = "//span[@itemprop='birthDate']//text()"
         PLACE_OF_BIRTH_CITY = "//span[text()='Lieu:']//following::span[1]//span//text()"
         PLACE_OF_BIRTH_COUNTRY = "//span[text()='Lieu:']//following::span[1]//span//img//@title"
         AGE = "//span[text()='Age:']//following::span[1]//text()"
@@ -38,16 +48,17 @@ class Players:
         SOCIAL_MEDIA = "//div[@class='socialmedia-icons']//@href"
 
     class Search:
-        BASE = "//div[@class='box'][h2[contains(text(), 'players')]]"
         FOUND = "//text()"
-        URL = BASE + "//td[@class='hauptlink']//a//@href"
-        NAME = BASE + "//td[@class='hauptlink']//a//@title"
-        POSITION = BASE + "//td[@class='zentriert'][1]//text()"
-        CLUB_IMAGE = BASE + "//td[@class='zentriert'][2]//img//@src"
-        CLUB_NAME = BASE + "//img[@class='tiny_wappen']//@title"
-        AGE = BASE + "//td[@class='zentriert'][3]//text()"
-        NATIONALITY = BASE + "//img//@title"
-        MARKET_VALUE = BASE + "//td[@class='rechts hauptlink']//text()"
+        BASE = "//div[@class='box'][h2[contains(text(), 'players')]]"
+        RESULTS = BASE + "//tbody//tr[@class='odd' or @class='even']"
+        ID = ".//td[@class='hauptlink']//a/@href"
+        NAME = ".//td[@class='hauptlink']//a//@title"
+        POSITION = ".//td[@class='zentriert'][1]//text()"
+        CLUB_NAME = ".//img[@class='tiny_wappen']//@title"
+        CLUB_IMAGE = ".//img[@class='tiny_wappen']//@src"
+        AGE = ".//td[@class='zentriert'][3]//text()"
+        NATIONALITIES = ".//img[@class='flaggenrahmen']/@title"
+        MARKET_VALUE = ".//td[@class='rechts hauptlink']//text()"
 
     class MarketValue:
         URL = "//a[@class='data-header__market-value-wrapper']//@href"
@@ -59,29 +70,6 @@ class Players:
         RANKINGS_POSITIONS = "//span[contains(@class, 'quick-fact__content--large')]//text()"
 
     class Transfers:
-        TRANSFERS_URLS = "//a[@class='grid__cell grid__cell--center tm-player-transfer-history-grid__link']//@href"
-        SEASONS = "//div[@class='grid__cell grid__cell--center tm-player-transfer-history-grid__season']//text()"
-        DATES = "//div[@class='grid__cell grid__cell--center tm-player-transfer-history-grid__date']//text()"
-        OLD_CLUBS_URLS = (
-            "//div[@class='grid__cell grid__cell--center tm-player-transfer-history-grid__old-club']"
-            "/a[@class='tm-player-transfer-history-grid__club-link']/@href"
-        )
-        OLD_CLUBS_NAMES = (
-            "//div[@class='grid__cell grid__cell--center tm-player-transfer-history-grid__old-club']"
-            "/a[@class='tm-player-transfer-history-grid__club-link']/text()"
-        )
-        NEW_CLUBS_URLS = (
-            "//div[@class='grid__cell grid__cell--center tm-player-transfer-history-grid__new-club']"
-            "/a[@class='tm-player-transfer-history-grid__club-link']/@href"
-        )
-        NEW_CLUBS_NAMES = (
-            "//div[@class='grid__cell grid__cell--center tm-player-transfer-history-grid__new-club']"
-            "/a[@class='tm-player-transfer-history-grid__club-link']/text()"
-        )
-        MARKET_VALUES = (
-            "//div[@class='grid__cell grid__cell--center tm-player-transfer-history-grid__market-value']//text()"
-        )
-        FEES = "//div[@class='grid__cell grid__cell--center tm-player-transfer-history-grid__fee']//text()"
         YOUTH_CLUBS = "//div[@data-viewport='Jugendvereine']//div//text()"
 
     class Stats:
@@ -190,7 +178,6 @@ class Competitions:
         NAMES = "//td[@class='hauptlink no-border-links']//a//text()"
 
 
-class Commons:
-    class Search:
-        PAGE_NUMBER_LAST = "//li[@class='tm-pagination__list-item tm-pagination__list-item--icon-last-page']//@href"
-        PAGE_NUMBER_ACTIVE = "//li[@class='tm-pagination__list-item tm-pagination__list-item--active']//@href"
+class Pagination:
+    PAGE_NUMBER_LAST = "//li[contains(@class, 'list-item--icon-last-page')]//@href"
+    PAGE_NUMBER_ACTIVE = "//li[contains(@class, 'list-item--active')]//@href"
