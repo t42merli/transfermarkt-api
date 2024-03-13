@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from datetime import datetime
 
 from app.services.base import TransfermarktBase
-from app.utils.regex import REGEX_DOB_AGE
+from app.utils.regex import REGEX_DOB
 from app.utils.utils import clean_response, extract_from_url, safe_regex
 from app.utils.xpath import Players
 
@@ -49,7 +49,7 @@ class TransfermarktPlayerProfile(TransfermarktBase):
         self.response["imageURL"] = self.get_text_by_xpath(Players.Profile.IMAGE_URL)
         self.response["dateOfBirth"] = safe_regex(
             self.get_text_by_xpath(Players.Profile.DATE_OF_BIRTH_AGE),
-            REGEX_DOB_AGE,
+            REGEX_DOB,
             "dob",
         )
         self.response["placeOfBirth"] = {
@@ -58,7 +58,7 @@ class TransfermarktPlayerProfile(TransfermarktBase):
         }
         self.response["age"] = safe_regex(
             self.get_text_by_xpath(Players.Profile.DATE_OF_BIRTH_AGE),
-            REGEX_DOB_AGE,
+            REGEX_DOB,
             "age",
         )
         self.response["height"] = self.get_text_by_xpath(Players.Profile.HEIGHT)
